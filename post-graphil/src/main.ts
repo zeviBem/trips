@@ -1,5 +1,6 @@
+import { morgan } from 'morgan';
 // import express from 'express';
-// import postgraphile from 'postgraphile';
+import postgraphile from 'postgraphile';
 // import cors from 'cors';
 // import 'dotenv/config'
 // const app = express();
@@ -83,29 +84,42 @@
 // });
 
 
-import express  from "express";
-import morgan from "morgan";
-import postgraphile from "postgraphile";
-import cors from "cors";
+// import express  from "express";
+// import morgan from "morgan";
+// import postgraphile from "postgraphile";
+// import cors from "cors";
+
+// const app = express();
+
+
+// const Option = {
+//   origin: 'http://localhost:4200'
+// }
+// app.use(express.json());
+// app.use(morgan('tiny'));
+// app.use(cors(Option))
+
+// app.use(postgraphile("postgres://postgres:212208409@localhost:5432/users", 
+// "public", {
+//   watchPg: true,
+//   graphiql: true,
+//   enhanceGraphiql: true
+// }))
+
+// app.listen(4000, "localhost", () => {
+//   console.log(`[ready] http://localhost:4000/graphql`);
+  
+// })
+import cors from 'cors';
+import express from 'express';
 
 const app = express();
 
+const { PORT } = process.env;
 
-const Option = {
-  origin: 'http://localhost:4200'
-}
+app.use(cors());
 app.use(express.json());
-app.use(morgan('tiny'));
-app.use(cors(Option))
+app.use(postgraphile)
 
-app.use(postgraphile("postgres://zeev:212208409@localhost:5432/users", 
-"public", {
-  watchPg: true,
-  graphiql: true,
-  enhanceGraphiql: true
-}))
+app.listen(PORT, () => console.log(`http://localhost:${PORT}/graphiql`))
 
-app.listen(4000, "localhost", () => {
-  console.log(`[ready] http://localhost:4000/graphql`);
-  
-})
